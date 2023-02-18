@@ -1,0 +1,11 @@
+version: "3.7"
+services:
+  auth:
+    build: .
+    restart: always
+    ports:
+      - "8080:8080"
+    environment:
+      - SECRET=super_serial_secret_10000
+    volumes:
+      - ./:/app
