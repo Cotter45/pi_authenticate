@@ -68,7 +68,6 @@ func Login(c *gin.Context) {
 		Username: user.Username,
 		Email:    user.Email,
 		ApiKey:   userApp.ApiKey,
-		AppId:    app.ID,
 	}
 
 	// create JWT token

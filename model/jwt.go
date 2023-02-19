@@ -31,7 +31,6 @@ func (manager *JWTManager) Generate(user *SafeUser) (string, error) {
     },
     UserID: user.ID,
     Email:  user.Email,
-    AppID:  user.AppId,
     ApiKey: user.ApiKey,
   }
 

@@ -18,8 +18,4 @@ type SafeUser struct {
 	Username   string `json:"username"`
 	Email      string `json:"email"`
 	ApiKey     string `json:"ApiKey"` // random string for password reset or jwt refresh
-	AppId      uint   `json:"appId"`
-	CreatedAt  string `json:"createdAt"`
-	UpdatedAt  string `json:"updatedAt"`
-	DeletedAt  string `json:"deletedAt"`
 }
