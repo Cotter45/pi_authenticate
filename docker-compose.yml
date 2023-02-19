@@ -9,3 +9,4 @@ services:
       - SECRET=super_serial_secret_10000
     volumes:
       - ./:/app
+    command: --add-host=host.docker.internal:host-gateway
