@@ -28,7 +28,7 @@ func ResetPassword(c *gin.Context) {
 	
 	// find user
 	var user model.User
-	if err := db.Where("reset_token = ?", request.ResetCode).First(&user).Error; err != nil {
+	if err := db.Where("reset_token = ? AND reset_token IS NOT NULL", request.ResetCode).First(&user).Error; err != nil {
 		c.JSON(400, gin.H{
 			"error": "Invalid request",
 		})
@@ -53,10 +53,7 @@ func ResetPassword(c *gin.Context) {
 	}
 
 	// update user app key to new key
-	db.Model(&user).Updates(model.User{
-		Password: hash,
-		ResetToken: "",
-	})
+	db.Model(&user).Updates(map[string]interface{}{"password": hash, "reset_token": gorm.Expr("NULL")})
 
 	// return success
 	c.JSON(201, gin.H{
