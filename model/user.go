@@ -9,7 +9,7 @@ type User struct {
 	Username   string `gorm:"unique_index;" json:"username"` // app may not use usernames
 	Email      string `gorm:"unique_index;not null" json:"email"`
 	Password   string `gorm:"not null" json:"password"` // hashed
-	ResetToken string `json:"resetToken"`               // hashed random string for password reset
+	ResetToken string `json:"resetToken"`               // random string for password reset
 }
 
 // Safe user struct

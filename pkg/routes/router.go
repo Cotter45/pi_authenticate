@@ -20,7 +20,11 @@ func InitRoutes() *gin.Engine {
 	r.Use(middleware.AuthMiddleware())
 
 	r.POST("/authenticate", Authenticate)
+	r.POST("/refresh", Refresh)
 	r.POST("/logout", Logout)
+
+	r.POST("/resetCode", ResetCode)
+	r.POST("/resetPassword", ResetPassword)
 
 	r.Use(middleware.AdminMiddleware())
 	r.POST("/createApp", CreateApp)
