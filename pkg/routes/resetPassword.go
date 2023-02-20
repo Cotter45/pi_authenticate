@@ -17,7 +17,6 @@ type ResetPasswordRequest struct {
 // Reset password
 func ResetPassword(c *gin.Context) {
 	db := c.MustGet("db").(*gorm.DB)
-	user := c.MustGet("user").(model.User)
 	
 	var request ResetPasswordRequest
 	if err := c.ShouldBindJSON(&request); err != nil {
@@ -26,9 +25,10 @@ func ResetPassword(c *gin.Context) {
 		})
 		return
 	}
-
-	// check if reset code is valid
-	if user.ResetToken != request.ResetCode {
+	
+	// find user
+	var user model.User
+	if err := db.Where("reset_token = ?", request.ResetCode).First(&user).Error; err != nil {
 		c.JSON(400, gin.H{
 			"error": "Invalid request",
 		})
